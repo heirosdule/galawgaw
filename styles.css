@@ -1,78 +1,114 @@
-.card {
-  background-color: white;
-  border: 1px solid #333;
-  border-radius: .5rem;
-  padding: .5rem;
-  max-width: 300px;
-  margin: 0 auto;
-  animation: fade 250ms ease-in-out forwards;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Poppins", sans-serif;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: .5rem;
-  gap: .25em;
+.step-wizard {
+    background-color: #21d4fd;
+    background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.step-wizard-list{
+    background: #fff;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+    color: #333;
+    list-style-type: none;
+    border-radius: 10px;
+    display: flex;
+    padding: 20px 10px;
+    position: relative;
+    z-index: 10;
 }
 
-.form-group:last-child {
-  margin: 0;
+.step-wizard-item{
+    padding: 0 20px;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -ms-flex-positive:1;
+    flex-grow: 1;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    min-width: 170px;
+    position: relative;
 }
-
-.form-group > label {
-  font-weight: bold;
-  font-size: .8em;
-  color: #333;
+.step-wizard-item + .step-wizard-item:after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 19px;
+    background: #21d4fd;
+    width: 100%;
+    height: 2px;
+    transform: translateX(-50%);
+    z-index: -10;
 }
-
-.form-group > input {
-  border: 1px solid #333;
-  border-radius: .25em;
-  font-size: 1rem;
-  padding: .25em;
+.progress-count{
+    height: 40px;
+    width:40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: 600;
+    margin: 0 auto;
+    position: relative;
+    z-index:10;
+    color: transparent;
 }
-
-.step-title {
-  margin: 0;
-  margin-bottom: 1rem;
-  text-align: center;
+.progress-count:after{
+    content: "";
+    height: 40px;
+    width: 40px;
+    background: #21d4fd;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: -10;
 }
-
-.card.active {
-  animation: slide 250ms 125ms ease-in-out both;
+.progress-count:before{
+    content: "";
+    height: 10px;
+    width: 20px;
+    border-left: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -60%) rotate(-45deg);
+    transform-origin: center center;
 }
-
-.multi-step-form {
-  overflow: hidden;
-  position: relative;
+.progress-label{
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 10px;
 }
-
-.hide {
-  display: none;
+.current-item .progress-count:before,
+.current-item ~ .step-wizard-item .progress-count:before{
+    display: none;
 }
-
-@keyframes slide {
-  0% {
-    transform: translateX(200%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+.current-item ~ .step-wizard-item .progress-count:after{
+    height:10px;
+    width:10px;
 }
-
-@keyframes fade {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(.75);
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0);
-  }
+.current-item ~ .step-wizard-item .progress-label{
+    opacity: 0.5;
+}
+.current-item .progress-count:after{
+    background: #fff;
+    border: 2px solid #21d4fd;
+}
+.current-item .progress-count{
+    color: #21d4fd;
 }
